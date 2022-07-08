@@ -1,0 +1,66 @@
+.header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 0 60px
+  box-shadow: 0px 1px 5px 0px rgba(0, 142, 151, 0.23)
+  .logo
+    display: block
+    width: 200px
+    height: 70px
+    background: url('assets/icons/logo.svg') no-repeat top / cover
+
+  .nav
+    display: flex
+    gap: 2vw
+    &__link
+      display: block
+      text-decoration: none
+      color: #008E97
+      font-size: 1.3rem
+      font-weight: 500
+      transition: 0.25s
+      &_active
+        color: #833185
+      &:hover
+        transform: scale(1.05)
+
+
+.main-page
+  background: rgb(0,142,151)
+  background: linear-gradient(145deg, rgba(0,142,151,0.11250437675070024) 31%, rgba(255,255,255,1) 100%)
+
+.container
+  max-width: 1680px
+  margin: 0 auto
+  padding: 30px 40px
+
+.footer
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 20px 60px
+  box-shadow: 0px -1px 5px 0px rgba(0, 142, 151, 0.23)
+  color: #008E97
+  &__link
+    text-decoration: none
+    color: inherit
+    transition: 0.25s
+    &:hover
+      transform: scale(1.05)
+  .rss-link
+    display: block
+    width: 100px
+    height: 40px
+    background: url('assets/icons/rss-logo.svg') no-repeat center / contain
+  .github-link
+    position: relative
+    padding-left: 30px
+    &::before
+      position: absolute
+      top: -1px
+      left: 0   
+      content: ''
+      width: 24px
+      height: 24px
+      background: url('assets/icons/github.svg') no-repeat center / contain

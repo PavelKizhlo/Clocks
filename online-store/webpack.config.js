@@ -2,17 +2,12 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
   entry: path.resolve(__dirname, './src/index.ts'),
   mode: 'development',
   module: {
     rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
       {
         test: /\.ts$/,
         use: 'ts-loader',
@@ -21,7 +16,10 @@ const baseConfig = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    alias: {
+      assets: path.resolve(__dirname, 'src/assets/'),
+    },
+    extensions: ['.js', '.ts'],
   },
   output: {
     filename: 'index.js',
@@ -33,11 +31,6 @@ const baseConfig = {
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: "./src/assets", to: "./assets" },
-      ],
-    }),
   ],
 };
 
