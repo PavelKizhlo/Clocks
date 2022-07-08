@@ -9,7 +9,6 @@
     width: 200px
     height: 70px
     background: url('assets/icons/logo.svg') no-repeat top / cover
-
   .nav
     display: flex
     gap: 2vw
@@ -64,3 +63,29 @@
       width: 24px
       height: 24px
       background: url('assets/icons/github.svg') no-repeat center / contain
+
+@media (max-width: 1140px)
+  .header
+    padding: 0 20px
+    .logo
+      width: 160px
+      height: 55px
+    .nav
+      &__link
+        font-size: 1rem
+  .container
+    padding: 20px 20px
+  .footer
+    padding: 10px 20px
+    &__text
+      font-size: 0.8rem
+    .rss-link
+      width: 70px
+      height: 25px
+    .github-link
+      padding-left: 20px
+      font-size: 0.8rem
+      &::before
+        top: 0
+        width: 16px
+        height: 16px
