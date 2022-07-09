@@ -1,0 +1,89 @@
+.home-page
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: 100%
+  &__clock
+    display: grid
+    align-items: center
+    width: 50%
+    height: 100%
+    .clock-face
+      position: relative
+      display: flex
+      align-items: center
+      justify-content: center
+      background: url('assets/clock/clock-face.svg') no-repeat center / contain
+      &::after
+        content: ''
+        display: block
+        padding-bottom: 100%
+      &__hour
+        position: absolute
+        width: 10%
+        height: 67%
+        background-image: url('assets/clock/hour.svg')
+        background-repeat: no-repeat
+        background-size: 100% 60%
+      &__min
+        position: absolute
+        width: 10%
+        height: 80%
+        background-image: url('assets/clock/minute.svg')
+        background-repeat: no-repeat
+        background-size: 100% 59%
+      &__sec
+        position: absolute
+        width: 10%
+        height: 93%
+        background-image: url('assets/clock/second.svg')
+        background-repeat: no-repeat
+        background-size: 100% 59%
+  &__content
+    width: 46%
+  &__title
+    margin: 0
+    margin-bottom: 2vw
+    font-size: 4rem
+    font-weight: 200
+  &__text
+    margin: 0
+    margin-bottom: 2vw
+    text-align: justify
+    line-height: 1.6rem
+    font-weight: 300
+  &__link
+    padding: 10px 30px
+    background-color: #008E97
+    border: none
+    border-radius: 3px
+    font-family: inherit
+    font-weight: 500
+    font-size: 1rem
+    color: #FFFFFF
+    transition: 0.25s
+    cursor: pointer
+    &:hover
+      transform: scale(1.05)
+
+@media (max-width: 1140px)
+  .home-page
+    &__title
+      font-size: 3rem
+
+@media (max-width: 900px)
+  .home-page
+    flex-direction: column
+    justify-content: flex-start
+    gap: 3vw
+    &__clock
+      height: auto
+    &__content
+      width: 60%
+      text-align: center
+    &__title
+      font-size: 2rem
+    &__text
+      margin-bottom: 3vw
+      &:hover
+        transform: none

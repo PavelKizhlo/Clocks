@@ -3,19 +3,19 @@ import './appView.sass';
 
 class AppView implements View {
     render() {
-        const app = document.querySelector('#app') as HTMLBodyElement;
+        const app = document.getElementById('app') as HTMLBodyElement;
 
         app.innerHTML = `
           <header class="header">
-            <a href="#" class="logo"></a>
+            <div class="logo"></div>
             <nav class="nav">
-              <a href="#" class="nav__link nav__link_active">Home</a>
-              <a href="#" class="nav__link">Catalog</a>
-              <a href="#" class="nav__link">About</a>
+              <button class="nav__link nav__link_active">Home</button>
+              <button class="nav__link">Catalog</button>
+              <button class="nav__link">About</button>
             </nav>
           </header>
           <main class="main-page">
-            <div class="container"></div>
+            <div class="container" id="container"></div>
           </main>
           <footer class="footer">
             <a href="https://rs.school/js/" class="footer__link rss-link"></a>
