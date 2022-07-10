@@ -3,6 +3,12 @@ import './home.sass';
 
 class HomePage implements View {
     render() {
+        const activeLink = document.querySelector('.nav__link_active');
+        if (activeLink) {
+            activeLink.classList.remove('nav__link_active');
+        }
+
+        (document.querySelector('.nav__link_home') as HTMLButtonElement).classList.add('nav__link_active');
         const container = document.getElementById('container') as HTMLBodyElement;
 
         container.innerHTML = `

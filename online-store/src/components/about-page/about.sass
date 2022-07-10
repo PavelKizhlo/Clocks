@@ -1,0 +1,56 @@
+.about-page
+  &__title
+    margin: 0
+    margin-bottom: 2vw
+    font-size: 4rem
+    font-weight: 200
+  &__item
+    display: flex
+    gap: 3vw
+    margin-bottom: 4vw
+  &__subtitle
+    margin: 0
+    margin-bottom: 1vw
+    font-size: 2rem
+    font-weight: 200
+  &__text
+    margin: 0
+    text-align: justify
+    text-indent: 2vw
+    font-size: 1.2rem
+  &__image
+    display: block
+    width: 50%
+    object-fit: contain
+  .history
+    flex-direction: row-reverse
+  .facts
+    flex-direction: row-reverse
+
+@media (max-width: 1140px)
+  .about-page
+    &__title
+      font-size: 3rem
+    &__subtitle
+      font-size: 1.8rem
+    &__text
+      text-indent: 1vw
+      font-size: 1rem
+
+@media (max-width: 900px)
+  .about-page
+    &__item
+      flex-direction: column
+      margin-bottom: 5vw
+    &__subtitle
+      text-align: center
+    &__text
+      text-align: center
+    &__image
+      margin: 0 auto
+      width: 70%
+      object-fit: contain
+    .history
+      flex-direction: column
+    .facts
+      flex-direction: column

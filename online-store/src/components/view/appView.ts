@@ -9,9 +9,9 @@ class AppView implements View {
           <header class="header">
             <div class="logo"></div>
             <nav class="nav">
-              <button class="nav__link nav__link_active">Home</button>
-              <button class="nav__link">Catalog</button>
-              <button class="nav__link">About</button>
+              <button class="nav__link nav__link_home">Home</button>
+              <button class="nav__link nav__link_catalog">Catalog</button>
+              <button class="nav__link nav__link_about">About</button>
             </nav>
           </header>
           <main class="main-page">

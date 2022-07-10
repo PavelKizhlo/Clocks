@@ -35,6 +35,7 @@ const baseConfig = {
     new CopyWebpackPlugin({
       patterns: [
         { from: './src/assets/favicon.ico', to: '../dist' },
+        { from: './src/assets/images', to: '../dist/assets' },
       ],
     })
   ],
