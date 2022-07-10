@@ -1,0 +1,47 @@
+.catalog-page
+  &__content
+    display: flex
+    gap: 5vw
+    padding-bottom: 3vw
+    border-bottom: 1px solid #D5D917
+  &__title
+    margin: 0
+    margin-bottom: 2vw
+    font-size: 4rem
+    font-weight: 200
+  &__text
+    margin: 0
+    text-align: justify
+    text-indent: 2vw
+    font-size: 1.2rem
+  &__image
+    display: block
+    width: 350px
+    object-fit: contain
+
+.products
+  display: flex
+  gap: 3vw
+  &__filter-block
+    width: 320px
+    padding-top: 3vw
+    border-right: 1px solid #D5D917
+  &__card-block
+    width: 100%
+    padding-top: 3vw
+
+@media (max-width: 1140px)
+  .catalog-page
+    margin-bottom: 3vw
+    &__title
+      font-size: 3rem
+    &__text
+      text-indent: 1vw
+      font-size: 1rem
+
+@media (max-width: 900px)
+  .catalog-page
+    &__content
+      flex-direction: column
+      align-items: center
+      gap: 3vw

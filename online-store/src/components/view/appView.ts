@@ -18,9 +18,9 @@ class AppView implements View {
             <div class="container" id="container"></div>
           </main>
           <footer class="footer">
-            <a href="https://rs.school/js/" class="footer__link rss-link"></a>
+            <a href="https://rs.school/js/" target="_blank" class="footer__link rss-link"></a>
             <span class="footer__text">RS School 2022</span>
-            <a href="https://github.com/PavelKizhlo" class="footer__link github-link">@PavelKizhlo</a>
+            <a href="https://github.com/PavelKizhlo" target="_blank" class="footer__link github-link">@PavelKizhlo</a>
           </footer>
         `;
     }

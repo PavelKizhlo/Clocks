@@ -1,8 +1,10 @@
 import { View } from '../../interfaces/interfaces';
+import CatalogPage from '../catalog-page/catalog';
 import './home.sass';
 
 class HomePage implements View {
     render() {
+        const catalogPage = new CatalogPage();
         const activeLink = document.querySelector('.nav__link_active');
         if (activeLink) {
             activeLink.classList.remove('nav__link_active');
@@ -30,6 +32,11 @@ class HomePage implements View {
             </div>
           </div>
         `;
+
+        (document.querySelector('.home-page__link') as HTMLButtonElement).addEventListener('click', (): void => {
+            catalogPage.render();
+        });
+
         this.startClock();
     }
 
