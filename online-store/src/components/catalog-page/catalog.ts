@@ -1,7 +1,17 @@
 import { View } from '../../interfaces/interfaces';
+import Filter from './filter/filter';
+import Search from './search/search';
 import './catalog.sass';
 
 class CatalogPage implements View {
+    private filter: Filter;
+    private search: Search;
+
+    constructor() {
+        this.filter = new Filter();
+        this.search = new Search();
+    }
+
     render() {
         const activeLink = document.querySelector('.nav__link_active');
         if (activeLink) {
@@ -34,6 +44,9 @@ class CatalogPage implements View {
             </div>
           </div>
         `;
+
+        this.search.render();
+        this.filter.render();
     }
 }
 

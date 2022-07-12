@@ -1,0 +1,46 @@
+.search
+  margin-bottom: 1vw
+  &__title
+    margin: 0
+    margin-bottom: 10px
+    font-size: 1.2rem
+    font-weight: 400
+  &__wrapper
+    position: relative
+    width: 90%
+    padding-left: 11px
+    &::before
+      position: absolute
+      top: 7px
+      right: 8px
+      display: block
+      content: ''
+      width: 20px
+      height: 20px
+      background: url('assets/icons/search.svg') no-repeat center / contain
+    &.search__active
+      &::after
+        position: absolute
+        top: 7px
+        right: 8px
+        display: block
+        content: ''
+        width: 20px
+        height: 20px
+        background: url('assets/icons/cross.svg') no-repeat center / contain
+        cursor: pointer
+      &::before
+        display: none
+    input[type="text"]
+      width: 100%
+      height: 35px
+      padding-left: 10px
+      padding-right: 35px
+      background-color: #E2F3F4
+      border: 1px solid #008D98
+      border-radius: 2px
+      font-family: inherit
+      font-size: 1rem
+      font-weight: 200
+      &:focus-visible
+        outline: none
