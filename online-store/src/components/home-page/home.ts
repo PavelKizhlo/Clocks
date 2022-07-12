@@ -38,6 +38,8 @@ class HomePage implements View {
         });
 
         this.startClock();
+
+        localStorage.setItem('page', 'home');
     }
 
     private startClock() {

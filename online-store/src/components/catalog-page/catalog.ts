@@ -47,6 +47,8 @@ class CatalogPage implements View {
 
         this.search.render();
         this.filter.render();
+
+        localStorage.setItem('page', 'catalog');
     }
 }
 

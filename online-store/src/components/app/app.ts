@@ -19,7 +19,20 @@ class App implements View {
 
     render() {
         this.view.render();
-        this.homePage.render();
+        switch (localStorage.getItem('page')) {
+            case null:
+                this.homePage.render();
+                break;
+            case 'home':
+                this.homePage.render();
+                break;
+            case 'catalog':
+                this.catalogPage.render();
+                break;
+            case 'about':
+                this.aboutPage.render();
+                break;
+        }
 
         (document.querySelector('.nav__link_home') as HTMLButtonElement).addEventListener('click', (): void => {
             this.homePage.render();

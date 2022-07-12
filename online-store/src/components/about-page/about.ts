@@ -59,6 +59,8 @@ class AboutPage implements View {
           </div>
         </div>
         `;
+
+        localStorage.setItem('page', 'about');
     }
 }
 
