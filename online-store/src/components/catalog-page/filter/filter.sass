@@ -25,10 +25,21 @@
         transform: translateX(5px)
     input[type="checkbox"]
       &:checked
-        &~.label
+        &~.label:not(.label__color)
           font-weight: 300
           &::before
             background: url('assets/icons/check.svg') no-repeat center
+        &~.label__color
+          &::after
+            position: absolute
+            top: -3px
+            left: -3px
+            display: block
+            content: ''
+            width: 34px
+            height: 34px
+            border: 1px solid #843085
+            border-radius: 100%
   &__title
     margin: 0
     margin-bottom: 10px
@@ -50,6 +61,56 @@
     cursor: pointer
     &:hover
       transform: scale(1.05)
+
+.color
+  .colors-wrapper
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    gap: 11px
+  &__item
+    .label
+      margin: 0
+      padding: 0
+      font-size: 0
+      &::before
+        position: static
+        display: block
+        width: 30px
+        height: 30px
+        border: none
+        border-radius: 100%
+        opacity: 0.9
+      &:hover
+        transform: none
+        opacity: 0.5
+    .black
+      &::before
+        background-color: #000000
+    .brown
+      &::before
+        background-color: #aa5700
+    .blue
+      &::before
+        background-color: #4ea1e8
+    .gold
+      &::before
+        background-color: #ffd048
+    .green
+      &::before
+        background-color: #13a337
+    .orange
+      &::before
+        background-color: #ff8228
+    .silver
+      &::before
+        background-color: #dedede
+    .white
+      &::before
+        background-color: #ffffff
+    .yellow
+      &::before
+        background-color: #ffe81a
 
 .movement
   &__item

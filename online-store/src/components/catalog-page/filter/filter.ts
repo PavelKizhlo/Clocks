@@ -15,11 +15,11 @@ class Filter implements View {
               <input type="checkbox" name="alarm-clocks" id="alarm-clocks">
               <label class="label" for="alarm-clocks">Alarm clocks</label>
             </div>
-            <div class="color__item">
+            <div class="prod-type__item">
               <input type="checkbox" name="table-clocks" id="table-clocks">
               <label class="label" for="table-clocks">Table clocks</label>
             </div>
-            <div class="color__item">
+            <div class="prod-type__item">
               <input type="checkbox" name="wall-clocks" id="wall-clocks">
               <label class="label" for="wall-clocks">Wall clocks</label>
             </div>
@@ -61,21 +61,43 @@ class Filter implements View {
           </div>
           <div class="filters__item color">
             <h2 class="filters__title">Color</h2>
-            <div class="color__item">
-              <input type="checkbox" name="all-colors" id="all-colors">
-              <label class="label" for="all-colors">All</label>
-            </div>
-            <div class="prod-type__item">
-              <input type="checkbox" name="black" id="black">
-              <label class="label" for="black">Black</label>
-            </div>
-            <div class="prod-type__item">
-              <input type="checkbox" name="blue" id="blue">
-              <label class="label" for="blue">Blue</label>
-            </div>
-            <div class="color__item">
-              <input type="checkbox" name="brown" id="brown">
-              <label class="label" for="brown">Brown</label>
+            <div class="colors-wrapper">
+              <div class="color__item">
+                <input type="checkbox" name="black" id="black">
+                <label class="label label__color black" for="black">Black</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="brown" id="brown">
+                <label class="label label__color brown" for="brown">Brown</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="blue" id="blue">
+                <label class="label label__color blue" for="blue">Blue</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="gold" id="gold">
+                <label class="label label__color gold" for="gold">Gold</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="green" id="green">
+                <label class="label label__color green" for="green">Green</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="orange" id="orange">
+                <label class="label label__color orange" for="orange">Orange</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="silver" id="silver">
+                <label class="label label__color silver" for="silver">Silver</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="white" id="white">
+                <label class="label label__color white" for="white">White</label>
+              </div>
+              <div class="color__item">
+                <input type="checkbox" name="yellow" id="yellow">
+                <label class="label label__color yellow" for="yellow">Yellow</label>
+              </div>
             </div>
           </div>
           <div class="filters__item movement">
