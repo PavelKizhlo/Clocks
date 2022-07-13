@@ -7,10 +7,29 @@ class Search implements View {
 
         searchContainer.innerHTML = `
           <h2 class="search__title">Search</h2>
-          <div class="search__wrapper"><input type="text" name="search" id="search" autocomplete="off" autofocus placeholder="Search here"></div>
+          <div class="search__wrapper">
+            <input type="text" name="search" id="search" autocomplete="off" placeholder="Search here">
+            <span class="clean-search"></span>
+          </div>
         `;
 
-        (document.getElementById('search') as HTMLInputElement).focus();
+        const searchField = document.getElementById('search') as HTMLInputElement;
+        const searchWrapper = searchContainer.querySelector('.search__wrapper') as HTMLDivElement;
+        const cleanSearch = searchContainer.querySelector('.clean-search') as HTMLSpanElement;
+
+        searchField.focus();
+        searchField.addEventListener('input', () => {
+            searchWrapper.classList.add('search__active');
+            if (searchField.value === '') {
+                searchWrapper.classList.remove('search__active');
+            }
+        });
+
+        cleanSearch.addEventListener('click', () => {
+            searchField.value = '';
+            searchField.focus();
+            searchWrapper.classList.remove('search__active');
+        });
     }
 }
 
