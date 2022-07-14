@@ -1,4 +1,4 @@
-import { View } from '../../../interfaces/interfaces';
+import { View, Filters } from '../../../interfaces/interfaces';
 import Search from '../search/search';
 import './filter.sass';
 import noUiSlider, { Formatter, target, API } from 'nouislider';
@@ -13,50 +13,50 @@ class Filter implements View {
           <div class="filters__item prod-type">
             <h2 class="filters__title">Product Type</h2>
             <div class="prod-type__item">
-              <input type="checkbox" name="alarm-clocks" id="alarm-clocks">
+              <input type="checkbox" name="type" id="alarm-clocks">
               <label class="label" for="alarm-clocks">Alarm clocks</label>
             </div>
             <div class="prod-type__item">
-              <input type="checkbox" name="table-clocks" id="table-clocks">
+              <input type="checkbox" name="type" id="table-clocks">
               <label class="label" for="table-clocks">Table clocks</label>
             </div>
             <div class="prod-type__item">
-              <input type="checkbox" name="wall-clocks" id="wall-clocks">
+              <input type="checkbox" name="type" id="wall-clocks">
               <label class="label" for="wall-clocks">Wall clocks</label>
             </div>
             <div class="prod-type__item">
-              <input type="checkbox" name="pocket-watches" id="pocket-watches">
+              <input type="checkbox" name="type" id="pocket-watches">
               <label class="label" for="pocket-watches">Pocket watches</label>
             </div>
           </div>
           <div class="filters__item brand">
             <h2 class="filters__title">Brand</h2>
             <div class="brand__item">
-              <input type="checkbox" name="dugena" id="dugena">
+              <input type="checkbox" name="brand" id="dugena">
               <label class="label" for="dugena">Dugena</label>
             </div>
             <div class="brand__item">
-              <input type="checkbox" name="filius" id="filius">
+              <input type="checkbox" name="brand" id="filius">
               <label class="label" for="filius">Filius</label>
             </div>
             <div class="brand__item">
-              <input type="checkbox" name="huamet" id="huamet">
+              <input type="checkbox" name="brand" id="huamet">
               <label class="label" for="huamet">Huamet</label>
             </div>
             <div class="brand__item">
-              <input type="checkbox" name="junghans" id="junghans">
+              <input type="checkbox" name="brand" id="junghans">
               <label class="label" for="junghans">Junghans</label>
             </div>
             <div class="brand__item">
-              <input type="checkbox" name="lexon" id="lexon">
+              <input type="checkbox" name="brand" id="lexon">
               <label class="label" for="lexon">Lexon</label>
             </div>
             <div class="brand__item">
-              <input type="checkbox" name="seiko" id="seiko">
+              <input type="checkbox" name="brand" id="seiko">
               <label class="label" for="seiko">Seiko</label>
             </div>
             <div class="brand__item">
-              <input type="checkbox" name="tissot" id="tissot">
+              <input type="checkbox" name="brand" id="tissot">
               <label class="label" for="tissot">Tissot</label>
             </div>
           </div>
@@ -64,39 +64,39 @@ class Filter implements View {
             <h2 class="filters__title">Color</h2>
             <div class="colors-wrapper">
               <div class="color__item">
-                <input type="checkbox" name="black" id="black">
+                <input type="checkbox" name="color" id="black">
                 <label class="label label__color black" for="black">Black</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="brown" id="brown">
+                <input type="checkbox" name="color" id="brown">
                 <label class="label label__color brown" for="brown">Brown</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="blue" id="blue">
+                <input type="checkbox" name="color" id="blue">
                 <label class="label label__color blue" for="blue">Blue</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="gold" id="gold">
+                <input type="checkbox" name="color" id="gold">
                 <label class="label label__color gold" for="gold">Gold</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="green" id="green">
+                <input type="checkbox" name="color" id="green">
                 <label class="label label__color green" for="green">Green</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="orange" id="orange">
+                <input type="checkbox" name="color" id="orange">
                 <label class="label label__color orange" for="orange">Orange</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="silver" id="silver">
+                <input type="checkbox" name="color" id="silver">
                 <label class="label label__color silver" for="silver">Silver</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="white" id="white">
+                <input type="checkbox" name="color" id="white">
                 <label class="label label__color white" for="white">White</label>
               </div>
               <div class="color__item">
-                <input type="checkbox" name="yellow" id="yellow">
+                <input type="checkbox" name="color" id="yellow">
                 <label class="label label__color yellow" for="yellow">Yellow</label>
               </div>
             </div>
@@ -127,7 +127,7 @@ class Filter implements View {
           <div class="filters__item popular">
             <!-- <h2 class="filters__title">Popular</h2> -->
             <div class="popular__item">
-              <input type="checkbox" name="is-popular" id="is-popular">
+              <input type="checkbox" name="popular" id="is-popular">
               <label class="label" for="is-popular">Popular only</label>
             </div>
           </div>
@@ -180,10 +180,110 @@ class Filter implements View {
                 ((priceSlider as target).noUiSlider as API).set([0, 300]);
                 ((amountSlider as target).noUiSlider as API).set([0, 100]);
 
+                localStorage.removeItem('searchString');
                 const search = new Search();
                 search.render();
             });
         });
+
+        this.setFilterData();
+        this.getFilterData();
+    }
+
+    private getFilterData() {
+        const filterDataJSON = localStorage.getItem('filterData');
+        let filterData: Filters = filterDataJSON
+            ? (JSON.parse(filterDataJSON) as Filters)
+            : {
+                  type: [],
+                  brand: [],
+                  color: [],
+                  movement: 'all-movements',
+                  price: [0, 300],
+                  amount: [0, 100],
+                  isPopular: false,
+              };
+
+        const priceSlider = document.getElementById('price-slider') as HTMLDivElement;
+        const amountSlider = document.getElementById('amount-slider') as HTMLDivElement;
+
+        (document.querySelector('.filters') as HTMLDivElement).addEventListener('input', (evt) => {
+            const target = evt.target as HTMLInputElement;
+            if (target.type === 'radio') {
+                filterData.movement = target.id;
+            }
+
+            if (target.name === 'popular') {
+                filterData.isPopular = target.checked;
+            }
+
+            if (target.name === 'type' || target.name === 'brand' || target.name === 'color') {
+                target.checked
+                    ? filterData[target.name].push(target.id)
+                    : (filterData[target.name] = filterData[target.name].filter((item) => item !== target.id));
+            }
+
+            localStorage.setItem('filterData', JSON.stringify(filterData));
+        });
+
+        ((priceSlider as target).noUiSlider as API).on('end', (values, handle, unencoded) => {
+            filterData.price = unencoded;
+            localStorage.setItem('filterData', JSON.stringify(filterData));
+        });
+
+        ((amountSlider as target).noUiSlider as API).on('end', (values, handle, unencoded) => {
+            filterData.amount = unencoded;
+            localStorage.setItem('filterData', JSON.stringify(filterData));
+        });
+
+        (document.getElementById('clear-filters') as HTMLButtonElement).addEventListener('click', () => {
+            filterData = {
+                type: [],
+                brand: [],
+                color: [],
+                movement: 'all-movements',
+                price: [0, 300],
+                amount: [0, 100],
+                isPopular: false,
+            };
+            localStorage.setItem('filterData', JSON.stringify(filterData));
+        });
+    }
+
+    private setFilterData() {
+        const filterDataJSON = localStorage.getItem('filterData');
+
+        if (filterDataJSON) {
+            const filterData = JSON.parse(filterDataJSON) as Filters;
+            const priceSlider = document.getElementById('price-slider') as HTMLDivElement;
+            const amountSlider = document.getElementById('amount-slider') as HTMLDivElement;
+
+            for (const key in filterData) {
+                if (key === 'type' || key === 'brand' || key === 'color') {
+                    document.querySelectorAll(`input[name="${key}"]`).forEach((input) => {
+                        (input as HTMLInputElement).checked = filterData[key].includes(input.id);
+                    });
+                }
+
+                if (key === 'isPopular') {
+                    (document.querySelector('input[name="popular"]') as HTMLInputElement).checked = filterData[key];
+                }
+
+                if (key === 'movement') {
+                    document.querySelectorAll(`input[name="${key}"]`).forEach((input) => {
+                        (input as HTMLInputElement).checked = filterData[key] === input.id;
+                    });
+                }
+
+                if (key === 'price') {
+                    ((priceSlider as target).noUiSlider as API).set(filterData[key]);
+                }
+
+                if (key === 'amount') {
+                    ((amountSlider as target).noUiSlider as API).set(filterData[key]);
+                }
+            }
+        }
     }
 
     private mergeTooltips(slider: target, threshold: number, separator: string) {
