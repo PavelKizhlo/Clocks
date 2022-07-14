@@ -1,0 +1,43 @@
+.sort
+  display: flex
+  justify-content: space-between
+  align-items: center
+  gap: 20px
+  &::after
+    display: block
+    content: ''
+    height: 1px
+    background-color: #D5D917
+    order: 2
+    flex-grow: 1
+  &__products-found
+    font-size: 1.2rem
+    font-weight: 200
+    order: 1
+  &__wrapper
+    position: relative
+    display: flex
+    gap: 10px
+    padding-right: 25px
+    order: 3
+    &::after
+      position: absolute
+      top: 1px
+      right: 0
+      content: ''
+      width: 20px
+      height: 20px
+      background: url('assets/icons/dropdown.svg') no-repeat center / contain
+  &__by
+    font-size: 1.2rem
+    font-weight: 200
+  select
+    appearance: none
+    border: none
+    font-family: inherit
+    font-size: 1.2rem
+    font-weight: 200
+    background-color: #eef8f8
+    cursor: pointer
+    &:focus-visible
+      outline: none

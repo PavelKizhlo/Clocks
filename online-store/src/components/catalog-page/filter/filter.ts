@@ -1,5 +1,6 @@
 import { View, Filters } from '../../../interfaces/interfaces';
 import Search from '../search/search';
+import Sort from '../sort/sort';
 import './filter.sass';
 import noUiSlider, { Formatter, target, API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
@@ -181,8 +182,12 @@ class Filter implements View {
                 ((amountSlider as target).noUiSlider as API).set([0, 100]);
 
                 localStorage.removeItem('searchString');
+                localStorage.removeItem('filterData');
+                localStorage.removeItem('sort');
                 const search = new Search();
+                const sort = new Sort();
                 search.render();
+                sort.render();
             });
         });
 
