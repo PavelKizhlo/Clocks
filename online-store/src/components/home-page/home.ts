@@ -6,11 +6,12 @@ class HomePage implements View {
     render() {
         const catalogPage = new CatalogPage();
         const activeLink = document.querySelector('.nav__link_active');
+        const homeLink = document.querySelector('.nav__link_home') as HTMLButtonElement;
         if (activeLink) {
             activeLink.classList.remove('nav__link_active');
         }
 
-        (document.querySelector('.nav__link_home') as HTMLButtonElement).classList.add('nav__link_active');
+        homeLink.classList.add('nav__link_active');
         const container = document.getElementById('container') as HTMLBodyElement;
 
         container.innerHTML = `
@@ -33,7 +34,9 @@ class HomePage implements View {
           </div>
         `;
 
-        (document.querySelector('.home-page__link') as HTMLButtonElement).addEventListener('click', (): void => {
+        const shopNowButton = document.querySelector('.home-page__link') as HTMLButtonElement;
+
+        shopNowButton.addEventListener('click', (): void => {
             catalogPage.render();
         });
 

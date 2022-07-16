@@ -17,11 +17,12 @@ class CatalogPage implements View {
 
     render() {
         const activeLink = document.querySelector('.nav__link_active');
+        const catalogLink = document.querySelector('.nav__link_catalog') as HTMLButtonElement;
         if (activeLink) {
             activeLink.classList.remove('nav__link_active');
         }
 
-        (document.querySelector('.nav__link_catalog') as HTMLButtonElement).classList.add('nav__link_active');
+        catalogLink.classList.add('nav__link_active');
         const container = document.getElementById('container') as HTMLBodyElement;
 
         container.innerHTML = `

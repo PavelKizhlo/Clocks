@@ -18,27 +18,23 @@
         content: ''
         display: block
         padding-bottom: 100%
-      &__hour
-        position: absolute
-        width: 10%
-        height: 67%
-        background-image: url('assets/clock/hour.svg')
-        background-repeat: no-repeat
-        background-size: 100% 60%
-      &__min
-        position: absolute
-        width: 10%
-        height: 80%
-        background-image: url('assets/clock/minute.svg')
-        background-repeat: no-repeat
-        background-size: 100% 59%
+      &__hour,
+      &__min,
       &__sec
         position: absolute
         width: 10%
-        height: 93%
-        background-image: url('assets/clock/second.svg')
         background-repeat: no-repeat
         background-size: 100% 59%
+      &__hour
+        height: 67%
+        background-image: url('assets/clock/hour.svg')
+        background-size: 100% 60%
+      &__min
+        height: 80%
+        background-image: url('assets/clock/minute.svg')
+      &__sec
+        height: 93%
+        background-image: url('assets/clock/second.svg')
   &__content
     width: 46%
   &__title

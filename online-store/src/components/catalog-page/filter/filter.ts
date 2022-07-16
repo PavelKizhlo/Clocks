@@ -170,7 +170,9 @@ class Filter implements View {
         this.mergeTooltips(priceSlider, 30, ' - ');
         this.mergeTooltips(amountSlider, 20, ' - ');
 
-        (document.getElementById('clear-filters') as HTMLButtonElement).addEventListener('click', () => {
+        const clearButton = document.getElementById('clear-filters') as HTMLButtonElement;
+
+        clearButton.addEventListener('click', () => {
             filters.querySelectorAll('input').forEach((input) => {
                 if (input.type === 'radio') {
                     input.checked = input.id === 'all-movements' ? true : false;
@@ -212,7 +214,9 @@ class Filter implements View {
         const priceSlider = document.getElementById('price-slider') as HTMLDivElement;
         const amountSlider = document.getElementById('amount-slider') as HTMLDivElement;
 
-        (document.querySelector('.filters') as HTMLDivElement).addEventListener('input', (evt) => {
+        const filters = document.querySelector('.filters') as HTMLDivElement;
+
+        filters.addEventListener('input', (evt) => {
             const target = evt.target as HTMLInputElement;
             if (target.type === 'radio') {
                 filterData.movement = target.id;

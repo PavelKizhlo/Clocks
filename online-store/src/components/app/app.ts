@@ -20,9 +20,6 @@ class App implements View {
     render() {
         this.view.render();
         switch (localStorage.getItem('page')) {
-            case null:
-                this.homePage.render();
-                break;
             case 'home':
                 this.homePage.render();
                 break;
@@ -32,21 +29,29 @@ class App implements View {
             case 'about':
                 this.aboutPage.render();
                 break;
+            default:
+                this.homePage.render();
+                break;
         }
 
-        (document.querySelector('.nav__link_home') as HTMLButtonElement).addEventListener('click', (): void => {
+        const logoLink = document.querySelector('.logo') as HTMLDivElement;
+        const homeLink = document.querySelector('.nav__link_home') as HTMLButtonElement;
+        const catalogLink = document.querySelector('.nav__link_catalog') as HTMLButtonElement;
+        const aboutLink = document.querySelector('.nav__link_about') as HTMLButtonElement;
+
+        homeLink.addEventListener('click', (): void => {
             this.homePage.render();
         });
 
-        (document.querySelector('.logo') as HTMLButtonElement).addEventListener('click', (): void => {
+        logoLink.addEventListener('click', (): void => {
             this.homePage.render();
         });
 
-        (document.querySelector('.nav__link_about') as HTMLButtonElement).addEventListener('click', (): void => {
+        aboutLink.addEventListener('click', (): void => {
             this.aboutPage.render();
         });
 
-        (document.querySelector('.nav__link_catalog') as HTMLButtonElement).addEventListener('click', (): void => {
+        catalogLink.addEventListener('click', (): void => {
             this.catalogPage.render();
         });
     }
