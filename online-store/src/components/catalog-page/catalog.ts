@@ -2,6 +2,7 @@ import { View, Filters } from '../../interfaces/interfaces';
 import Filter from './filter/filter';
 import Search from './search/search';
 import Sort from './sort/sort';
+import Controller from './controller/controller';
 import CardBlock from './card-block/cardBlock';
 import './catalog.sass';
 
@@ -10,12 +11,14 @@ class CatalogPage implements View {
     private search: Search;
     private sort: Sort;
     private cardBlock: CardBlock;
+    private controller: Controller;
 
     constructor() {
         this.filter = new Filter();
         this.search = new Search();
         this.sort = new Sort();
         this.cardBlock = new CardBlock();
+        this.controller = new Controller();
     }
 
     render() {
@@ -70,6 +73,8 @@ class CatalogPage implements View {
                 popularOnly: false,
             });
         }
+
+        this.controller.start();
 
         localStorage.setItem('page', 'catalog');
     }

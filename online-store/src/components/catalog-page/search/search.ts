@@ -12,18 +12,12 @@ class Search implements View {
             <span class="clean-search"></span>
           </div>
         `;
-        this.setSearchString();
-        this.getSearchString();
 
         const searchField = document.getElementById('search') as HTMLInputElement;
         const searchWrapper = searchContainer.querySelector('.search__wrapper') as HTMLDivElement;
-        const cleanSearch = searchContainer.querySelector('.clean-search') as HTMLSpanElement;
+        const clearSearch = searchContainer.querySelector('.clean-search') as HTMLSpanElement;
 
         searchField.focus();
-
-        if (searchField.value) {
-            searchWrapper.classList.add('search__active');
-        }
 
         searchField.addEventListener('input', () => {
             searchWrapper.classList.add('search__active');
@@ -32,27 +26,12 @@ class Search implements View {
             }
         });
 
-        cleanSearch.addEventListener('click', () => {
+        clearSearch.addEventListener('click', () => {
             searchField.value = '';
             searchField.focus();
             searchWrapper.classList.remove('search__active');
             localStorage.removeItem('searchString');
         });
-    }
-
-    private getSearchString() {
-        const searchField = document.getElementById('search') as HTMLInputElement;
-
-        searchField.addEventListener('input', () => {
-            localStorage.setItem('searchString', searchField.value);
-        });
-    }
-
-    private setSearchString() {
-        const searchString = localStorage.getItem('searchString') ? localStorage.getItem('searchString') : '';
-        const searchField = document.getElementById('search') as HTMLInputElement;
-
-        searchField.value = searchString as string;
     }
 }
 

@@ -16,26 +16,6 @@ class Sort implements View {
               <option value="byYear_old">year from old to new</option>
             </select>
         `;
-
-        this.setSortData();
-        this.getSortData();
-    }
-
-    private getSortData() {
-        const sortSelect = document.getElementById('sort') as HTMLSelectElement;
-
-        sortSelect.addEventListener('change', () => {
-            localStorage.setItem('sort', sortSelect.value);
-        });
-    }
-
-    private setSortData() {
-        const sortData = localStorage.getItem('sort');
-        const sortSelect = document.getElementById('sort') as HTMLSelectElement;
-
-        if (sortData) {
-            sortSelect.value = sortData;
-        }
     }
 }
 

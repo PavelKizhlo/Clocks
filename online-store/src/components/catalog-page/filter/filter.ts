@@ -1,12 +1,10 @@
-import { View, Filters } from '../../../interfaces/interfaces';
+import { View } from '../../../interfaces/interfaces';
 import Search from '../search/search';
 import Sort from '../sort/sort';
-import CardBlock from '../card-block/cardBlock';
 import './filter.sass';
 import noUiSlider, { Formatter, target, API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import wNumb from 'wnumb';
-import Emitter from 'events';
 
 class Filter implements View {
     render() {
@@ -194,124 +192,6 @@ class Filter implements View {
                 sort.render();
             });
         });
-
-        this.setFilterData();
-        this.getFilterData();
-    }
-
-    getFilterData() {
-        const emitter = new Emitter();
-        const update = 'update';
-
-        const filterDataJSON = localStorage.getItem('filterData');
-        let filterData: Filters = filterDataJSON
-            ? (JSON.parse(filterDataJSON) as Filters)
-            : {
-                  type: [],
-                  brand: [],
-                  color: [],
-                  movement: 'all-movements',
-                  price: [0, 300],
-                  amount: [0, 100],
-                  popularOnly: false,
-              };
-
-        const priceSlider = document.getElementById('price-slider') as HTMLDivElement;
-        const amountSlider = document.getElementById('amount-slider') as HTMLDivElement;
-
-        const filters = document.querySelector('.filters') as HTMLDivElement;
-
-        filters.addEventListener('input', (evt) => {
-            const target = evt.target as HTMLInputElement;
-            if (target.type === 'radio') {
-                filterData.movement = target.id;
-                emitter.emit(update);
-            }
-
-            if (target.name === 'popular') {
-                filterData.popularOnly = target.checked;
-                emitter.emit(update);
-            }
-
-            if (target.name === 'type' || target.name === 'brand' || target.name === 'color') {
-                target.checked
-                    ? filterData[target.name].push(target.id)
-                    : (filterData[target.name] = filterData[target.name].filter((item) => item !== target.id));
-                emitter.emit(update);
-            }
-
-            localStorage.setItem('filterData', JSON.stringify(filterData));
-        });
-
-        ((priceSlider as target).noUiSlider as API).on('end', (values, handle, unencoded) => {
-            filterData.price = unencoded;
-            localStorage.setItem('filterData', JSON.stringify(filterData));
-            emitter.emit(update);
-        });
-
-        ((amountSlider as target).noUiSlider as API).on('end', (values, handle, unencoded) => {
-            filterData.amount = unencoded;
-            localStorage.setItem('filterData', JSON.stringify(filterData));
-            emitter.emit(update);
-        });
-
-        const clearButton = document.getElementById('clear-filters') as HTMLButtonElement;
-
-        clearButton.addEventListener('click', () => {
-            filterData = {
-                type: [],
-                brand: [],
-                color: [],
-                movement: 'all-movements',
-                price: [0, 300],
-                amount: [0, 100],
-                popularOnly: false,
-            };
-            localStorage.setItem('filterData', JSON.stringify(filterData));
-            emitter.emit(update);
-        });
-
-        const cardBlock = new CardBlock();
-
-        emitter.on(update, () => {
-            cardBlock.render(filterData);
-        });
-    }
-
-    private setFilterData() {
-        const filterDataJSON = localStorage.getItem('filterData');
-
-        if (filterDataJSON) {
-            const filterData = JSON.parse(filterDataJSON) as Filters;
-            const priceSlider = document.getElementById('price-slider') as HTMLDivElement;
-            const amountSlider = document.getElementById('amount-slider') as HTMLDivElement;
-
-            for (const key in filterData) {
-                if (key === 'type' || key === 'brand' || key === 'color') {
-                    document.querySelectorAll(`input[name="${key}"]`).forEach((input) => {
-                        (input as HTMLInputElement).checked = filterData[key].includes(input.id);
-                    });
-                }
-
-                if (key === 'popularOnly') {
-                    (document.querySelector('input[name="popular"]') as HTMLInputElement).checked = filterData[key];
-                }
-
-                if (key === 'movement') {
-                    document.querySelectorAll(`input[name="${key}"]`).forEach((input) => {
-                        (input as HTMLInputElement).checked = filterData[key] === input.id;
-                    });
-                }
-
-                if (key === 'price') {
-                    ((priceSlider as target).noUiSlider as API).set(filterData[key]);
-                }
-
-                if (key === 'amount') {
-                    ((amountSlider as target).noUiSlider as API).set(filterData[key]);
-                }
-            }
-        }
     }
 
     private mergeTooltips(slider: target, threshold: number, separator: string) {
