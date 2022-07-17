@@ -1,4 +1,4 @@
-import { View } from '../../interfaces/interfaces';
+import { View, Filters } from '../../interfaces/interfaces';
 import Filter from './filter/filter';
 import Search from './search/search';
 import Sort from './sort/sort';
@@ -55,7 +55,21 @@ class CatalogPage implements View {
         this.search.render();
         this.filter.render();
         this.sort.render();
-        this.cardBlock.render();
+
+        const filterDataJSON = localStorage.getItem('filterData');
+        if (filterDataJSON) {
+            this.cardBlock.render(JSON.parse(filterDataJSON) as Filters);
+        } else {
+            this.cardBlock.render({
+                type: [],
+                brand: [],
+                color: [],
+                movement: 'all-movements',
+                price: [0, 300],
+                amount: [0, 100],
+                popularOnly: false,
+            });
+        }
 
         localStorage.setItem('page', 'catalog');
     }

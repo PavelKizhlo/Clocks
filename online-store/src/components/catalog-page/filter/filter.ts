@@ -1,10 +1,12 @@
 import { View, Filters } from '../../../interfaces/interfaces';
 import Search from '../search/search';
 import Sort from '../sort/sort';
+import CardBlock from '../card-block/cardBlock';
 import './filter.sass';
 import noUiSlider, { Formatter, target, API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import wNumb from 'wnumb';
+import Emitter from 'events';
 
 class Filter implements View {
     render() {
@@ -175,7 +177,7 @@ class Filter implements View {
         clearButton.addEventListener('click', () => {
             filters.querySelectorAll('input').forEach((input) => {
                 if (input.type === 'radio') {
-                    input.checked = input.id === 'all-movements' ? true : false;
+                    input.checked = input.id === 'all-movements';
                 } else {
                     input.checked = false;
                 }
@@ -197,7 +199,10 @@ class Filter implements View {
         this.getFilterData();
     }
 
-    private getFilterData() {
+    getFilterData() {
+        const emitter = new Emitter();
+        const update = 'update';
+
         const filterDataJSON = localStorage.getItem('filterData');
         let filterData: Filters = filterDataJSON
             ? (JSON.parse(filterDataJSON) as Filters)
@@ -208,7 +213,7 @@ class Filter implements View {
                   movement: 'all-movements',
                   price: [0, 300],
                   amount: [0, 100],
-                  isPopular: false,
+                  popularOnly: false,
               };
 
         const priceSlider = document.getElementById('price-slider') as HTMLDivElement;
@@ -220,16 +225,19 @@ class Filter implements View {
             const target = evt.target as HTMLInputElement;
             if (target.type === 'radio') {
                 filterData.movement = target.id;
+                emitter.emit(update);
             }
 
             if (target.name === 'popular') {
-                filterData.isPopular = target.checked;
+                filterData.popularOnly = target.checked;
+                emitter.emit(update);
             }
 
             if (target.name === 'type' || target.name === 'brand' || target.name === 'color') {
                 target.checked
                     ? filterData[target.name].push(target.id)
                     : (filterData[target.name] = filterData[target.name].filter((item) => item !== target.id));
+                emitter.emit(update);
             }
 
             localStorage.setItem('filterData', JSON.stringify(filterData));
@@ -238,14 +246,18 @@ class Filter implements View {
         ((priceSlider as target).noUiSlider as API).on('end', (values, handle, unencoded) => {
             filterData.price = unencoded;
             localStorage.setItem('filterData', JSON.stringify(filterData));
+            emitter.emit(update);
         });
 
         ((amountSlider as target).noUiSlider as API).on('end', (values, handle, unencoded) => {
             filterData.amount = unencoded;
             localStorage.setItem('filterData', JSON.stringify(filterData));
+            emitter.emit(update);
         });
 
-        (document.getElementById('clear-filters') as HTMLButtonElement).addEventListener('click', () => {
+        const clearButton = document.getElementById('clear-filters') as HTMLButtonElement;
+
+        clearButton.addEventListener('click', () => {
             filterData = {
                 type: [],
                 brand: [],
@@ -253,9 +265,16 @@ class Filter implements View {
                 movement: 'all-movements',
                 price: [0, 300],
                 amount: [0, 100],
-                isPopular: false,
+                popularOnly: false,
             };
             localStorage.setItem('filterData', JSON.stringify(filterData));
+            emitter.emit(update);
+        });
+
+        const cardBlock = new CardBlock();
+
+        emitter.on(update, () => {
+            cardBlock.render(filterData);
         });
     }
 
@@ -274,7 +293,7 @@ class Filter implements View {
                     });
                 }
 
-                if (key === 'isPopular') {
+                if (key === 'popularOnly') {
                     (document.querySelector('input[name="popular"]') as HTMLInputElement).checked = filterData[key];
                 }
 
