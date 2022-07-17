@@ -2,17 +2,20 @@ import { View } from '../../interfaces/interfaces';
 import Filter from './filter/filter';
 import Search from './search/search';
 import Sort from './sort/sort';
+import CardBlock from './card-block/cardBlock';
 import './catalog.sass';
 
 class CatalogPage implements View {
     private filter: Filter;
     private search: Search;
     private sort: Sort;
+    private cardBlock: CardBlock;
 
     constructor() {
         this.filter = new Filter();
         this.search = new Search();
         this.sort = new Sort();
+        this.cardBlock = new CardBlock();
     }
 
     render() {
@@ -52,6 +55,7 @@ class CatalogPage implements View {
         this.search.render();
         this.filter.render();
         this.sort.render();
+        this.cardBlock.render();
 
         localStorage.setItem('page', 'catalog');
     }
