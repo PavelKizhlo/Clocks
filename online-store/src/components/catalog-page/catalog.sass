@@ -49,11 +49,23 @@
 
 @media (max-width: 1140px)
   .catalog-page
+    &__products
+      flex-direction: column
+      gap: 0
     &__title
       font-size: 3rem
     &__text
       text-indent: 1vw
       font-size: 1rem
+
+  .products
+    &__filter-block
+      width: 100%
+      padding-top: 30px
+      padding-right: 0
+      border-right: none
+      .filter-block__filters
+        margin-bottom: 50px
 
 @media (max-width: 900px)
   .catalog-page
