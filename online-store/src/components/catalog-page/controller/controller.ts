@@ -1,4 +1,7 @@
 import { Filters } from '../../../interfaces/interfaces';
+import Search from '../search/search';
+import Filter from '../filter/filter';
+import Sort from '../sort/sort';
 import CardBlock from '../card-block/cardBlock';
 import { target, API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
@@ -8,10 +11,16 @@ class Controller {
     emitter: Emitter;
     filterData!: Filters;
     cardBlock: CardBlock;
+    search: Search;
+    filter: Filter;
+    sort: Sort;
 
     constructor() {
         this.emitter = new Emitter();
         this.cardBlock = new CardBlock();
+        this.search = new Search();
+        this.filter = new Filter();
+        this.sort = new Sort();
     }
 
     start() {
@@ -21,6 +30,7 @@ class Controller {
         this.getFilterData();
         this.setSortData();
         this.getSortData();
+        this.listenCleanButton();
 
         this.emitter.on('update', () => {
             this.cardBlock.render(this.filterData);
@@ -144,9 +154,15 @@ class Controller {
 
     private getSearchString() {
         const searchField = document.getElementById('search') as HTMLInputElement;
+        const clearSearch = document.querySelector('.clean-search') as HTMLSpanElement;
 
         searchField.addEventListener('input', () => {
             localStorage.setItem('searchString', searchField.value);
+            this.emitter.emit('update');
+        });
+
+        clearSearch.addEventListener('click', () => {
+            localStorage.removeItem('searchString');
             this.emitter.emit('update');
         });
     }
@@ -178,6 +194,28 @@ class Controller {
         if (sortData) {
             sortSelect.value = sortData;
         }
+    }
+
+    private listenCleanButton() {
+        const clearButton = document.getElementById('clear-filters') as HTMLButtonElement;
+
+        clearButton.addEventListener('click', () => {
+            localStorage.removeItem('searchString');
+            localStorage.removeItem('filterData');
+            localStorage.removeItem('sort');
+
+            this.search.render();
+            this.getSearchString();
+            this.setSearchString();
+
+            this.filter.render();
+            this.getFilterData();
+            this.setFilterData();
+
+            this.sort.render();
+            this.getSortData();
+            this.setSortData();
+        });
     }
 }
 

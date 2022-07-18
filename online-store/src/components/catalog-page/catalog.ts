@@ -7,15 +7,15 @@ import CardBlock from './card-block/cardBlock';
 import './catalog.sass';
 
 class CatalogPage implements View {
-    private filter: Filter;
     private search: Search;
+    private filter: Filter;
     private sort: Sort;
     private cardBlock: CardBlock;
     private controller: Controller;
 
     constructor() {
-        this.filter = new Filter();
         this.search = new Search();
+        this.filter = new Filter();
         this.sort = new Sort();
         this.cardBlock = new CardBlock();
         this.controller = new Controller();
@@ -47,6 +47,7 @@ class CatalogPage implements View {
             <div class="products__filter-block filter-block">
               <div class="filter-block__search search"></div>
               <div class="filter-block__filters filters"></div>
+              <button class="filter-block__clear" id="clear-filters">Clear filters</button>
             </div>
             <div class="products__card-block card-block">
               <div class="card-block__sort sort"></div>

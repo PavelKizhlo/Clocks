@@ -1,6 +1,4 @@
 import { View } from '../../../interfaces/interfaces';
-import Search from '../search/search';
-import Sort from '../sort/sort';
 import './filter.sass';
 import noUiSlider, { Formatter, target, API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
@@ -126,13 +124,11 @@ class Filter implements View {
             <div id="amount-slider"></div>
           </div>
           <div class="filters__item popular">
-            <!-- <h2 class="filters__title">Popular</h2> -->
             <div class="popular__item">
               <input type="checkbox" name="popular" id="is-popular">
               <label class="label" for="is-popular">Popular only</label>
             </div>
           </div>
-          <button class="filters__clear" id="clear-filters">Clear Filters</button>
         `;
 
         const priceSlider = document.getElementById('price-slider') as HTMLDivElement;
@@ -169,29 +165,6 @@ class Filter implements View {
 
         this.mergeTooltips(priceSlider, 30, ' - ');
         this.mergeTooltips(amountSlider, 20, ' - ');
-
-        const clearButton = document.getElementById('clear-filters') as HTMLButtonElement;
-
-        clearButton.addEventListener('click', () => {
-            filters.querySelectorAll('input').forEach((input) => {
-                if (input.type === 'radio') {
-                    input.checked = input.id === 'all-movements';
-                } else {
-                    input.checked = false;
-                }
-
-                ((priceSlider as target).noUiSlider as API).set([0, 300]);
-                ((amountSlider as target).noUiSlider as API).set([0, 100]);
-
-                localStorage.removeItem('searchString');
-                localStorage.removeItem('filterData');
-                localStorage.removeItem('sort');
-                const search = new Search();
-                const sort = new Sort();
-                search.render();
-                sort.render();
-            });
-        });
     }
 
     private mergeTooltips(slider: target, threshold: number, separator: string) {

@@ -30,7 +30,6 @@ class Search implements View {
             searchField.value = '';
             searchField.focus();
             searchWrapper.classList.remove('search__active');
-            localStorage.removeItem('searchString');
         });
     }
 }
