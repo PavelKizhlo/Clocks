@@ -16,6 +16,7 @@ class Controller {
     search: Search;
     filter: Filter;
     sort: Sort;
+    cartContent: string[];
 
     constructor() {
         this.emitter = new Emitter();
@@ -23,6 +24,7 @@ class Controller {
         this.search = new Search();
         this.filter = new Filter();
         this.sort = new Sort();
+        this.cartContent = [];
     }
 
     start() {
@@ -33,10 +35,10 @@ class Controller {
         this.setSortData();
         this.getSortData();
         this.listenCleanButton();
+        this.getCartData();
 
         this.emitter.on('update', () => {
             this.cardBlock.render(this.filterData, this.searchString, this.sortData);
-            console.log(this.filterData);
         });
     }
 
@@ -212,6 +214,48 @@ class Controller {
             this.getSortData();
 
             this.emitter.emit('update');
+        });
+    }
+
+    private getCartData() {
+        const cardWrapper = document.querySelector('.card-block__cards-wrapper') as HTMLDivElement;
+
+        cardWrapper.addEventListener('click', (evt) => {
+            const target = evt.target as HTMLElement;
+            const cartNumber = document.querySelector('.cart-number') as HTMLSpanElement;
+
+            if (target.classList.contains('card__button')) {
+                const card = target.parentElement as HTMLDivElement;
+
+                if (card.classList.contains('in-cart')) {
+                    card.classList.remove('in-cart');
+                    target.innerHTML = 'Add to cart';
+                    this.cartContent = this.cartContent.filter((item) => item !== card.id);
+                    localStorage.setItem('cartContent', this.cartContent.toString());
+
+                    if (this.cartContent.length) {
+                        cartNumber.innerHTML = `${this.cartContent.length}`;
+                    } else {
+                        cartNumber.classList.remove('cart-number_active');
+                    }
+                } else {
+                    if (this.cartContent.length < 5) {
+                        card.classList.add('in-cart');
+                        target.innerHTML = 'Remove from cart';
+                        this.cartContent.push(card.id);
+                        localStorage.setItem('cartContent', this.cartContent.toString());
+                        cartNumber.classList.add('cart-number_active');
+                        cartNumber.innerHTML = `${this.cartContent.length}`;
+                    } else {
+                        target.innerHTML = 'Too much !!!';
+                        card.classList.add('in-cart');
+                        setTimeout(() => {
+                            target.innerHTML = 'Add to cart';
+                            card.classList.remove('in-cart');
+                        }, 500);
+                    }
+                }
+            }
         });
     }
 }

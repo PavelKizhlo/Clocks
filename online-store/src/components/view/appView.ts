@@ -12,6 +12,9 @@ class AppView implements View {
               <button class="nav__link nav__link_home">Home</button>
               <button class="nav__link nav__link_catalog">Catalog</button>
               <button class="nav__link nav__link_about">About</button>
+              <div class="nav__link nav__link_cart">
+                <span class="cart-number"></span>
+              </div>
             </nav>
           </header>
           <main class="main-page">

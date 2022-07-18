@@ -5,6 +5,7 @@ class Card implements CardView {
     render(cardData: CardData) {
         const card = document.createElement('div');
         card.classList.add('card');
+        card.id = cardData.src.slice(0, -4);
 
         card.innerHTML = `
           <img src="./assets/catalog/cards/${cardData.src}" alt="${cardData.brand}" class="card__image">

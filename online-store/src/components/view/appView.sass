@@ -22,6 +22,29 @@
       font-weight: 500
       cursor: pointer
       transition: 0.25s
+      &_cart
+        position: relative
+        width: 40px
+        height: 40px
+        background: url('assets/icons/cart.svg') no-repeat center / contain
+        cursor: default
+        .cart-number
+          position: absolute
+          bottom: -6px
+          right: -14px
+          display: none
+          justify-content: center
+          align-items: center
+          width: 30px
+          height: 30px
+          border-radius: 100%
+          border: 1px solid #ffffff
+          background-color: #018d96
+          color: #ffffff
+          font-size: 1rem
+          font-weight: 200
+          &_active
+            display: flex
       &_active
         color: #833185
       &:hover
