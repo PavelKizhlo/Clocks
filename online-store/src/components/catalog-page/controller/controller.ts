@@ -35,10 +35,12 @@ class Controller {
         this.setSortData();
         this.getSortData();
         this.listenCleanButton();
-        this.getCartData();
+        this.setCartContent();
+        this.getCartContent();
 
         this.emitter.on('update', () => {
             this.cardBlock.render(this.filterData, this.searchString, this.sortData);
+            this.setCartContent();
         });
     }
 
@@ -217,7 +219,7 @@ class Controller {
         });
     }
 
-    private getCartData() {
+    private getCartContent() {
         const cardWrapper = document.querySelector('.card-block__cards-wrapper') as HTMLDivElement;
 
         cardWrapper.addEventListener('click', (evt) => {
@@ -255,6 +257,23 @@ class Controller {
                         }, 500);
                     }
                 }
+            }
+        });
+    }
+
+    private setCartContent() {
+        const cartContent = localStorage.getItem('cartContent') ? localStorage.getItem('cartContent') : '';
+        this.cartContent = cartContent ? cartContent.split(',') : [];
+
+        document.querySelectorAll('.card').forEach((card) => {
+            const cartNumber = document.querySelector('.cart-number') as HTMLSpanElement;
+            const button = card.querySelector('.card__button') as HTMLButtonElement;
+
+            if (this.cartContent.includes(card.id)) {
+                card.classList.add('in-cart');
+                button.innerHTML = 'Remove from cart';
+                cartNumber.classList.add('cart-number_active');
+                cartNumber.innerHTML = `${this.cartContent.length}`;
             }
         });
     }
