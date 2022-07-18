@@ -17,32 +17,34 @@ class CardBlock implements CardBlockView {
         `;
         const sorryMessage = document.querySelector('.sorry-message') as HTMLParagraphElement;
 
-        const filteredData = cardData.filter((item) => {
-            let type: string;
+        const filteredData = cardData
+            .filter((item) => {
+                let type: string;
 
-            switch (item.type) {
-                case 'Pocket watch':
-                    type = item.type[0].toLowerCase() + item.type.split(' ').join('-').slice(1) + 'es';
-                    break;
-                default:
-                    type = item.type[0].toLowerCase() + item.type.split(' ').join('-').slice(1) + 's';
-            }
+                switch (item.type) {
+                    case 'Pocket watch':
+                        type = item.type[0].toLowerCase() + item.type.split(' ').join('-').slice(1) + 'es';
+                        break;
+                    default:
+                        type = item.type[0].toLowerCase() + item.type.split(' ').join('-').slice(1) + 's';
+                }
 
-            const brand = item.brand[0].toLowerCase() + item.brand.slice(1);
-            const movement = item.movement.split(' ').join('-');
+                const brand = item.brand[0].toLowerCase() + item.brand.slice(1);
+                const movement = item.movement.split(' ').join('-');
 
-            return (
-                (filterData.type.includes(type) || filterData.type.length === 0) &&
-                (filterData.brand.includes(brand) || filterData.brand.length === 0) &&
-                (filterData.color.includes(item.color) || filterData.color.length === 0) &&
-                (filterData.movement === movement || filterData.movement === 'all-movements') &&
-                (item.isPopular !== filterData.popularOnly || !filterData.popularOnly) &&
-                item.price >= filterData.price[0] &&
-                item.price <= filterData.price[1] &&
-                item.amount >= filterData.amount[0] &&
-                item.amount <= filterData.amount[1]
-            );
-        });
+                return (
+                    (filterData.type.includes(type) || filterData.type.length === 0) &&
+                    (filterData.brand.includes(brand) || filterData.brand.length === 0) &&
+                    (filterData.color.includes(item.color) || filterData.color.length === 0) &&
+                    (filterData.movement === movement || filterData.movement === 'all-movements') &&
+                    (item.isPopular !== filterData.popularOnly || !filterData.popularOnly) &&
+                    item.price >= filterData.price[0] &&
+                    item.price <= filterData.price[1] &&
+                    item.amount >= filterData.amount[0] &&
+                    item.amount <= filterData.amount[1]
+                );
+            })
+            .filter((item) => item.brand.toLowerCase().includes(searchString));
 
         switch (sortData) {
             case 'byNameA_Z':
