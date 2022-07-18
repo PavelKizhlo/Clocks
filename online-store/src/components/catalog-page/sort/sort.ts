@@ -12,8 +12,8 @@ class Sort implements View {
             <select name="sort" id="sort">
               <option value="byNameA_Z">name from A to Z</option>
               <option value="byNameZ_A">name from Z to A</option>
-              <option value="byYear_new">year from new to old</option>
-              <option value="byYear_old">year from old to new</option>
+              <option value="byPrice_high">price from high to low</option>
+              <option value="byPrice_low">price from low to high</option>
             </select>
         `;
     }

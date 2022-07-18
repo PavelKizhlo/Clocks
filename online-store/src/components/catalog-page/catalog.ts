@@ -46,7 +46,7 @@ class CatalogPage implements View {
           <div class="catalog-page__products products">
             <div class="products__filter-block filter-block">
               <div class="filter-block__search search"></div>
-              <div class="filter-block__filters filters"></div>
+              <div class="filter-block__filters"></div>
               <button class="filter-block__clear" id="clear-filters">Clear filters</button>
             </div>
             <div class="products__card-block card-block">
@@ -60,20 +60,25 @@ class CatalogPage implements View {
         this.filter.render();
         this.sort.render();
 
-        const filterDataJSON = localStorage.getItem('filterData');
-        if (filterDataJSON) {
-            this.cardBlock.render(JSON.parse(filterDataJSON) as Filters);
-        } else {
-            this.cardBlock.render({
-                type: [],
-                brand: [],
-                color: [],
-                movement: 'all-movements',
-                price: [0, 300],
-                amount: [0, 100],
-                popularOnly: false,
-            });
-        }
+        const filterData = localStorage.getItem('filterData')
+            ? (JSON.parse(localStorage.getItem('filterData') as string) as Filters)
+            : ({
+                  type: [],
+                  brand: [],
+                  color: [],
+                  movement: 'all-movements',
+                  price: [0, 300],
+                  amount: [0, 100],
+                  popularOnly: false,
+              } as Filters);
+
+        const searchString = localStorage.getItem('searchString')
+            ? (localStorage.getItem('searchString') as string)
+            : '';
+
+        const sortData = localStorage.getItem('sort') ? (localStorage.getItem('sort') as string) : 'byNameA_Z';
+
+        this.cardBlock.render(filterData, searchString, sortData);
 
         this.controller.start();
 

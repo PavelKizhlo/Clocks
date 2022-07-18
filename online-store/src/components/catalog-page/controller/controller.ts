@@ -10,6 +10,8 @@ import Emitter from 'events';
 class Controller {
     emitter: Emitter;
     filterData!: Filters;
+    searchString!: string;
+    sortData!: string;
     cardBlock: CardBlock;
     search: Search;
     filter: Filter;
@@ -33,8 +35,8 @@ class Controller {
         this.listenCleanButton();
 
         this.emitter.on('update', () => {
-            this.cardBlock.render(this.filterData);
-            console.log(localStorage);
+            this.cardBlock.render(this.filterData, this.searchString, this.sortData);
+            console.log(this.filterData);
         });
     }
 
@@ -91,29 +93,6 @@ class Controller {
             localStorage.setItem('filterData', JSON.stringify(this.filterData));
             this.emitter.emit('update');
         });
-
-        const clearButton = document.getElementById('clear-filters') as HTMLButtonElement;
-
-        clearButton.addEventListener('click', () => {
-            this.filterData = {
-                type: [],
-                brand: [],
-                color: [],
-                movement: 'all-movements',
-                price: [0, 300],
-                amount: [0, 100],
-                popularOnly: false,
-            };
-            localStorage.setItem('filterData', JSON.stringify(this.filterData));
-            this.emitter.emit('update');
-        });
-
-        // const cardBlock = new CardBlock();
-
-        // this.emitter.on('update', () => {
-        //     this.filterData = filterData;
-        //     cardBlock.render(filterData);
-        // });
     }
 
     private setFilterData() {
@@ -158,11 +137,13 @@ class Controller {
 
         searchField.addEventListener('input', () => {
             localStorage.setItem('searchString', searchField.value);
+            this.searchString = searchField.value;
             this.emitter.emit('update');
         });
 
         clearSearch.addEventListener('click', () => {
             localStorage.removeItem('searchString');
+            this.searchString = '';
             this.emitter.emit('update');
         });
     }
@@ -183,6 +164,7 @@ class Controller {
 
         sortSelect.addEventListener('change', () => {
             localStorage.setItem('sort', sortSelect.value);
+            this.sortData = sortSelect.value;
             this.emitter.emit('update');
         });
     }
@@ -200,21 +182,36 @@ class Controller {
         const clearButton = document.getElementById('clear-filters') as HTMLButtonElement;
 
         clearButton.addEventListener('click', () => {
-            localStorage.removeItem('searchString');
-            localStorage.removeItem('filterData');
-            localStorage.removeItem('sort');
+            this.searchString = '';
+            localStorage.setItem('searchString', this.searchString);
+
+            this.filterData = this.filterData = {
+                type: [],
+                brand: [],
+                color: [],
+                movement: 'all-movements',
+                price: [0, 300],
+                amount: [0, 100],
+                popularOnly: false,
+            };
+            localStorage.setItem('filterData', JSON.stringify(this.filterData));
+
+            this.sortData = 'byNameA_Z';
+            localStorage.setItem('sort', this.sortData);
 
             this.search.render();
-            this.getSearchString();
             this.setSearchString();
+            this.getSearchString();
 
             this.filter.render();
-            this.getFilterData();
             this.setFilterData();
+            this.getFilterData();
 
             this.sort.render();
-            this.getSortData();
             this.setSortData();
+            this.getSortData();
+
+            this.emitter.emit('update');
         });
     }
 }

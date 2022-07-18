@@ -10,7 +10,7 @@ class CardBlock implements CardBlockView {
         this.card = new Card();
     }
 
-    render(filterOptions: Filters) {
+    render(filterData: Filters, searchString: string, sortData: string) {
         const cardWrapper = document.querySelector('.card-block__cards-wrapper') as HTMLDivElement;
         cardWrapper.innerHTML = `
             <p class="sorry-message">Sorry, no products matched your search!</p>
@@ -32,17 +32,48 @@ class CardBlock implements CardBlockView {
             const movement = item.movement.split(' ').join('-');
 
             return (
-                (filterOptions.type.includes(type) || filterOptions.type.length === 0) &&
-                (filterOptions.brand.includes(brand) || filterOptions.brand.length === 0) &&
-                (filterOptions.color.includes(item.color) || filterOptions.color.length === 0) &&
-                (filterOptions.movement === movement || filterOptions.movement === 'all-movements') &&
-                (item.isPopular !== filterOptions.popularOnly || !filterOptions.popularOnly) &&
-                item.price >= filterOptions.price[0] &&
-                item.price <= filterOptions.price[1] &&
-                item.amount >= filterOptions.amount[0] &&
-                item.amount <= filterOptions.amount[1]
+                (filterData.type.includes(type) || filterData.type.length === 0) &&
+                (filterData.brand.includes(brand) || filterData.brand.length === 0) &&
+                (filterData.color.includes(item.color) || filterData.color.length === 0) &&
+                (filterData.movement === movement || filterData.movement === 'all-movements') &&
+                (item.isPopular !== filterData.popularOnly || !filterData.popularOnly) &&
+                item.price >= filterData.price[0] &&
+                item.price <= filterData.price[1] &&
+                item.amount >= filterData.amount[0] &&
+                item.amount <= filterData.amount[1]
             );
         });
+
+        switch (sortData) {
+            case 'byNameA_Z':
+                filteredData.sort((a, b) => {
+                    if (a.brand < b.brand) {
+                        return -1;
+                    }
+                    if (a.brand > b.brand) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                break;
+            case 'byNameZ_A':
+                filteredData.sort((a, b) => {
+                    if (a.brand > b.brand) {
+                        return -1;
+                    }
+                    if (a.brand < b.brand) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                break;
+            case 'byPrice_high':
+                filteredData.sort((a, b) => b.price - a.price);
+                break;
+            case 'byPrice_low':
+                filteredData.sort((a, b) => a.price - b.price);
+                break;
+        }
 
         if (filteredData.length) {
             filteredData.forEach((item) => {

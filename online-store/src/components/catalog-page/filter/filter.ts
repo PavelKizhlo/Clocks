@@ -6,127 +6,129 @@ import wNumb from 'wnumb';
 
 class Filter implements View {
     render() {
-        const filters = document.querySelector('.filters') as HTMLDivElement;
+        const filters = document.querySelector('.filter-block__filters') as HTMLDivElement;
 
         filters.innerHTML = `
-          <div class="filters__item prod-type">
-            <h2 class="filters__title">Product Type</h2>
-            <div class="prod-type__item">
-              <input type="checkbox" name="type" id="alarm-clocks">
-              <label class="label" for="alarm-clocks">Alarm clocks</label>
-            </div>
-            <div class="prod-type__item">
-              <input type="checkbox" name="type" id="table-clocks">
-              <label class="label" for="table-clocks">Table clocks</label>
-            </div>
-            <div class="prod-type__item">
-              <input type="checkbox" name="type" id="wall-clocks">
-              <label class="label" for="wall-clocks">Wall clocks</label>
-            </div>
-            <div class="prod-type__item">
-              <input type="checkbox" name="type" id="pocket-watches">
-              <label class="label" for="pocket-watches">Pocket watches</label>
-            </div>
-          </div>
-          <div class="filters__item brand">
-            <h2 class="filters__title">Brand</h2>
-            <div class="brand__item">
-              <input type="checkbox" name="brand" id="dugena">
-              <label class="label" for="dugena">Dugena</label>
-            </div>
-            <div class="brand__item">
-              <input type="checkbox" name="brand" id="filius">
-              <label class="label" for="filius">Filius</label>
-            </div>
-            <div class="brand__item">
-              <input type="checkbox" name="brand" id="huamet">
-              <label class="label" for="huamet">Huamet</label>
-            </div>
-            <div class="brand__item">
-              <input type="checkbox" name="brand" id="junghans">
-              <label class="label" for="junghans">Junghans</label>
-            </div>
-            <div class="brand__item">
-              <input type="checkbox" name="brand" id="lexon">
-              <label class="label" for="lexon">Lexon</label>
-            </div>
-            <div class="brand__item">
-              <input type="checkbox" name="brand" id="seiko">
-              <label class="label" for="seiko">Seiko</label>
-            </div>
-            <div class="brand__item">
-              <input type="checkbox" name="brand" id="tissot">
-              <label class="label" for="tissot">Tissot</label>
-            </div>
-          </div>
-          <div class="filters__item color">
-            <h2 class="filters__title">Color</h2>
-            <div class="colors-wrapper">
-              <div class="color__item">
-                <input type="checkbox" name="color" id="black">
-                <label class="label label__color black" for="black">Black</label>
+          <div class="filters">       
+            <div class="filters__item prod-type">
+              <h2 class="filters__title">Product Type</h2>
+              <div class="prod-type__item">
+                <input type="checkbox" name="type" id="alarm-clocks">
+                <label class="label" for="alarm-clocks">Alarm clocks</label>
               </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="brown">
-                <label class="label label__color brown" for="brown">Brown</label>
+              <div class="prod-type__item">
+                <input type="checkbox" name="type" id="table-clocks">
+                <label class="label" for="table-clocks">Table clocks</label>
               </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="blue">
-                <label class="label label__color blue" for="blue">Blue</label>
+              <div class="prod-type__item">
+                <input type="checkbox" name="type" id="wall-clocks">
+                <label class="label" for="wall-clocks">Wall clocks</label>
               </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="gold">
-                <label class="label label__color gold" for="gold">Gold</label>
-              </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="green">
-                <label class="label label__color green" for="green">Green</label>
-              </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="orange">
-                <label class="label label__color orange" for="orange">Orange</label>
-              </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="silver">
-                <label class="label label__color silver" for="silver">Silver</label>
-              </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="white">
-                <label class="label label__color white" for="white">White</label>
-              </div>
-              <div class="color__item">
-                <input type="checkbox" name="color" id="yellow">
-                <label class="label label__color yellow" for="yellow">Yellow</label>
+              <div class="prod-type__item">
+                <input type="checkbox" name="type" id="pocket-watches">
+                <label class="label" for="pocket-watches">Pocket watches</label>
               </div>
             </div>
-          </div>
-          <div class="filters__item movement">
-            <h2 class="filters__title">Movement</h2>
-            <div class="movement__item">
-              <input type="radio" name="movement" id="all-movements" checked>
-              <label class="label" for="all-movements">All</label>
+            <div class="filters__item brand">
+              <h2 class="filters__title">Brand</h2>
+              <div class="brand__item">
+                <input type="checkbox" name="brand" id="dugena">
+                <label class="label" for="dugena">Dugena</label>
+              </div>
+              <div class="brand__item">
+                <input type="checkbox" name="brand" id="filius">
+                <label class="label" for="filius">Filius</label>
+              </div>
+              <div class="brand__item">
+                <input type="checkbox" name="brand" id="huamet">
+                <label class="label" for="huamet">Huamet</label>
+              </div>
+              <div class="brand__item">
+                <input type="checkbox" name="brand" id="junghans">
+                <label class="label" for="junghans">Junghans</label>
+              </div>
+              <div class="brand__item">
+                <input type="checkbox" name="brand" id="lexon">
+                <label class="label" for="lexon">Lexon</label>
+              </div>
+              <div class="brand__item">
+                <input type="checkbox" name="brand" id="seiko">
+                <label class="label" for="seiko">Seiko</label>
+              </div>
+              <div class="brand__item">
+                <input type="checkbox" name="brand" id="tissot">
+                <label class="label" for="tissot">Tissot</label>
+              </div>
             </div>
-            <div class="movement__item">
-              <input type="radio" name="movement" id="hand-winding">
-              <label class="label" for="hand-winding">Hand winding</label>
+            <div class="filters__item color">
+              <h2 class="filters__title">Color</h2>
+              <div class="colors-wrapper">
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="black">
+                  <label class="label label__color black" for="black">Black</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="brown">
+                  <label class="label label__color brown" for="brown">Brown</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="blue">
+                  <label class="label label__color blue" for="blue">Blue</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="gold">
+                  <label class="label label__color gold" for="gold">Gold</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="green">
+                  <label class="label label__color green" for="green">Green</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="orange">
+                  <label class="label label__color orange" for="orange">Orange</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="silver">
+                  <label class="label label__color silver" for="silver">Silver</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="white">
+                  <label class="label label__color white" for="white">White</label>
+                </div>
+                <div class="color__item">
+                  <input type="checkbox" name="color" id="yellow">
+                  <label class="label label__color yellow" for="yellow">Yellow</label>
+                </div>
+              </div>
             </div>
-            <div class="movement__item">
-              <input type="radio" name="movement" id="quartz">
-              <label class="label" for="quartz">Quartz</label>
+            <div class="filters__item movement">
+              <h2 class="filters__title">Movement</h2>
+              <div class="movement__item">
+                <input type="radio" name="movement" id="all-movements" checked>
+                <label class="label" for="all-movements">All</label>
+              </div>
+              <div class="movement__item">
+                <input type="radio" name="movement" id="hand-winding">
+                <label class="label" for="hand-winding">Hand winding</label>
+              </div>
+              <div class="movement__item">
+                <input type="radio" name="movement" id="quartz">
+                <label class="label" for="quartz">Quartz</label>
+              </div>
             </div>
-          </div>
-          <div class="filters__item price">
-            <h2 class="filters__title">Price</h2>
-            <div id="price-slider"></div>
-          </div>
-          <div class="filters__item amount">
-            <h2 class="filters__title">Amount</h2>
-            <div id="amount-slider"></div>
-          </div>
-          <div class="filters__item popular">
-            <div class="popular__item">
-              <input type="checkbox" name="popular" id="is-popular">
-              <label class="label" for="is-popular">Popular only</label>
+            <div class="filters__item price">
+              <h2 class="filters__title">Price</h2>
+              <div id="price-slider"></div>
+            </div>
+            <div class="filters__item amount">
+              <h2 class="filters__title">Amount</h2>
+              <div id="amount-slider"></div>
+            </div>
+            <div class="filters__item popular">
+              <div class="popular__item">
+                <input type="checkbox" name="popular" id="is-popular">
+                <label class="label" for="is-popular">Popular only</label>
+              </div>
             </div>
           </div>
         `;

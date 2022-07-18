@@ -3,7 +3,7 @@ export interface View {
 }
 
 export interface CardBlockView {
-    render: (options: Filters) => void;
+    render: (filterData: Filters, searchString: string, sortData: string) => void;
 }
 
 export interface CardView {
