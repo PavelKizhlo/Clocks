@@ -179,6 +179,7 @@ class Controller {
 
         if (sortData) {
             sortSelect.value = sortData;
+            this.sortData = sortData;
         }
     }
 
@@ -200,9 +201,6 @@ class Controller {
             };
             localStorage.setItem('filterData', JSON.stringify(this.filterData));
 
-            this.sortData = 'byNameA_Z';
-            localStorage.setItem('sort', this.sortData);
-
             this.search.render();
             this.setSearchString();
             this.getSearchString();
@@ -210,10 +208,6 @@ class Controller {
             this.filter.render();
             this.setFilterData();
             this.getFilterData();
-
-            this.sort.render();
-            this.setSortData();
-            this.getSortData();
 
             this.emitter.emit('update');
         });

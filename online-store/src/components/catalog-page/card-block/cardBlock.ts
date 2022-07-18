@@ -77,16 +77,6 @@ class CardBlock implements CardBlockView {
             case 'byPrice_low':
                 filteredData.sort((a, b) => a.price - b.price);
                 break;
-            default:
-                filteredData.sort((a, b) => {
-                    if (a.brand < b.brand) {
-                        return -1;
-                    }
-                    if (a.brand > b.brand) {
-                        return 1;
-                    }
-                    return 0;
-                });
         }
 
         const productsFound = document.querySelector('.sort__products-found') as HTMLSpanElement;
