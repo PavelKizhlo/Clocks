@@ -44,7 +44,9 @@ class CardBlock implements CardBlockView {
                     item.amount <= filterData.amount[1]
                 );
             })
-            .filter((item) => item.brand.toLowerCase().includes(searchString));
+            .filter((item) => {
+                return searchString ? item.brand.toLowerCase().includes(searchString) : true;
+            });
 
         switch (sortData) {
             case 'byNameA_Z':
@@ -75,14 +77,33 @@ class CardBlock implements CardBlockView {
             case 'byPrice_low':
                 filteredData.sort((a, b) => a.price - b.price);
                 break;
+            default:
+                filteredData.sort((a, b) => {
+                    if (a.brand < b.brand) {
+                        return -1;
+                    }
+                    if (a.brand > b.brand) {
+                        return 1;
+                    }
+                    return 0;
+                });
         }
+
+        const productsFound = document.querySelector('.sort__products-found') as HTMLSpanElement;
 
         if (filteredData.length) {
             filteredData.forEach((item) => {
                 cardWrapper.appendChild(this.card.render(item));
             });
+
+            if (filteredData.length === 1) {
+                productsFound.innerHTML = `${filteredData.length} Product found`;
+            } else {
+                productsFound.innerHTML = `${filteredData.length} Products found`;
+            }
         } else {
             sorryMessage.classList.add('sorry-message_active');
+            productsFound.innerHTML = '0 Products found';
         }
     }
 }

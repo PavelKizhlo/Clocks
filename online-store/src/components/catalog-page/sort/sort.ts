@@ -6,7 +6,7 @@ class Sort implements View {
         const sortContainer = document.querySelector('.sort') as HTMLDivElement;
 
         sortContainer.innerHTML = `
-          <span class="sort__products-found">Some Products Found</span>
+          <span class="sort__products-found"></span>
           <div class="sort__wrapper">
             <span class="sort__by">Sort by</span>
             <select name="sort" id="sort">
